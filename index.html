@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main">
+    
+        <form action="" method="POST" class="form" id="form-1">
+          <h3 class="heading">Đăng nhập</h3>      
+          <div class="spacer"></div>
+      
+          <div class="form-group">
+            <label for="fullname" class="form-label">Tên đăng nhập</label>
+            <input id="fullname" name="fullname" type="text" class="form-control">
+            <span class="form-message"></span>
+          </div>
+      
+          <!-- <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <span class="form-message"></span>
+          </div> -->
+      
+          <div class="form-group">
+            <label for="password" class="form-label">Mật khẩu</label>
+            <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+            <span class="form-message"></span>
+          </div>
+      
+          <!-- <div class="form-group">
+            <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+            <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+            <span class="form-message"></span>
+          </div> -->
+
+          <!-- ảnh đại diện -->
+          <!-- <div  class="form-group">
+            <label for="avatar" class="form-label">ảnh đại diện</label>
+            <input id="avatar" name="avatar" type="file" class="form-control">
+            <span class="form-message"></span>
+          </div> -->
+
+          <!-- tỉnh thành -->
+          <!-- <div class="form-group">
+            <label for="province" class="form-label">tỉnh thành</label>
+            <select id="province" name="province" class="form-control">
+              <option value="">--chọn tỉnh/tp--</option>
+              <option value="hni">hà nội</option>
+              <option value="hpg">hải phòng</option>
+            </select>
+            <span class="form-message"></span>
+          </div> -->
+
+          <!-- gender -->
+          <!-- <div class="form-group">
+            <label for="password_confirmation" class="form-label">giới tính</label>
+            <div>
+              <input name="gender" type="checkbox" value="male" class="form-control">
+              nam
+            </div>
+            <div>
+              <input name="gender" type="checkbox" value="female" class="form-control">
+              nữ
+            </div>
+            <div>
+              <input name="gender" type="checkbox" value="other" class="form-control">
+              khác
+            </div>
+            <span class="form-message"></span>
+          </div> -->
+      
+          <button class="form-submit">Đăng nhập</button>
+          <a href="./dangki.html" class="sign-up">Tạo tài khoản</a>
+        </form>
+      </div>
+  
+
+      <script src="./validation.js"></script>
+      <script>
+        var username = document.getElementById('fullname')
+        var password = document.getElementById('password')
+        
+
+        Validation({
+          form: '#form-1',
+          formGroupSelector: '.form-group' ,
+          erromess: '.form-message',
+          rules: [
+            Validation.isRequed('#fullname','vui lòng nhập tên đăng nhập của bạn'),
+            // Validation.isEmail('#email'),
+            // Validation.isRequed('#avatar'),
+            Validation.minlength('#password', 1, "vui lòng nhập mật khẩu của bạn"),
+            // Validation.isRequed('#password_confirmation'),  
+            // Validation.isRequed('input[name="gender"]'),  
+            // Validation.isRequed('#province'),
+            // Validation.isConfirmed('#password_confirmation', function(){
+            //   return document.querySelector('#form-1 #password').value
+            // }, 'mật khẩu nhập lại không chính xác')
+          ],
+          onSubmit : function(){
+            const user = JSON.parse(localStorage.getItem(username.value))
+            if (!user) {
+              alert("Sai thông tin đăng nhập");
+            }
+
+            if (username.value === user.fullname && password.value===user.password) {
+              alert("Đăng nhập Thành Công");
+              window.location.href='profile.html'
+            } else {
+              alert('sai mật khẩu')
+            }
+          }
+        })
+      </script>
+</body>
+</html>
+
+
+
+
